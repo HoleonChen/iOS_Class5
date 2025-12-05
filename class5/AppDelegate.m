@@ -6,7 +6,7 @@
 //
 
 #import "AppDelegate.h"
-#import "ScrollViewController.h"
+#import "ViewControllerCollection.h"
 
 @interface AppDelegate ()
 
@@ -21,7 +21,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     
-    self.window.rootViewController = [[ScrollViewController alloc] init];
+    self.window.rootViewController = [[CollectionViewController alloc] init]; //通过切换ScrollViewController,TableViewController和CollectionViewController进行不同高级组件的演示，在正式项目中请通过NavigationViewController之类的特殊视图控制器来控制不同视图的切换。
     [self.window makeKeyAndVisible];
     
     return YES;
