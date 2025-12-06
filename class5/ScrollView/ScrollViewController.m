@@ -7,7 +7,7 @@
 
 #import "ScrollViewController.h"
 
-@interface ScrollViewController () <UIScrollViewDelegate> //通过尖括号的形式让类遵守UIScrollViewDelegate协议，只有这样，才能将scrollView的delegate属性设置成self
+@interface ScrollViewController ()  //通过尖括号的形式让类遵守UIScrollViewDelegate协议，只有这样，才能将scrollView的delegate属性设置成self
 
 @property(nonatomic, strong) UIScrollView *scrollView;
 
@@ -57,6 +57,14 @@
 // 在⽤户开始拖动滚动视图时调⽤，处理拖动开始的逻辑，例如记录初始位置。
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     NSLog(@"开始拖拽");
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    NSLog(@"结束拖拽");
+}
+
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
+    NSLog(@"开始减速");
 }
 
 // 其他Delegate方法请参考讲义

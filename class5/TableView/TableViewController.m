@@ -7,6 +7,7 @@
 
 #import "TableViewController.h"
 #import "Contact.h"
+#import "ContactCell.h"
 
 @interface TableViewController () <UITableViewDataSource, UITableViewDelegate> //这里同时遵循了两个协议，详情可以见ScrollViewController.m
 
@@ -32,7 +33,7 @@
         _tableView.backgroundColor = [UIColor lightGrayColor];
         _tableView.dataSource = self;
         _tableView.delegate = self;
-        [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
+        [_tableView registerClass:[ContactCell class] forCellReuseIdentifier:@"Cell"];
     }
     return _tableView;
 }
@@ -43,9 +44,11 @@
         Contact *contact1 = [[Contact alloc] initWithName:@"陈学长" phoneNumber:@"18888888888"];
         Contact *contact2 = [[Contact alloc] initWithName:@"许学长" phoneNumber:@"16888888888"];
         Contact *contact3 = [[Contact alloc] initWithName:@"孙学长" phoneNumber:@"19888888888"];
+        Contact *contact4 = [[Contact alloc] initWithName:@"陈学姐" phoneNumber:@"13888888888"];
         [_contacts addObject:contact1];
         [_contacts addObject:contact2];
         [_contacts addObject:contact3];
+        [_contacts addObject:contact4];
     }
     return _contacts;
 }
@@ -63,7 +66,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
 //    这种方法不需要判空，但要选择默认样式的时候会比较麻烦。不过如果你要自定义一个cell类的话，直接用这个是最方便的👍
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    ContactCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
 //    还有一个方法，但是在使用的时候需要判断cell是否为空，不过好处是你在使用自带cell的时候可以选择UIKit提供的三种默认样式。
 //    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
@@ -76,8 +79,8 @@
 //    - (nullable __kindof UITableViewCell *)dequeueReusableCellWithIdentifier:(NSString*)identifier; // 委托⽅使⽤此⽅法获取⼀个已分配的 cell，替代分配新 cell 的操作。
     
     Contact *contact = self.contacts[indexPath.row];
-    cell.textLabel.text = contact.name;
-    cell.detailTextLabel.text = contact.phoneNumber;
+    cell.nameLabel.text = contact.name;
+    cell.phoneNumberLabel.text = contact.phoneNumber;
     return cell;
 }
 
